@@ -42,9 +42,12 @@ function Paginate(Model, options) {
     // TODO: These values should never be negative
     assert(typeof query.limit, 'number', 'Limit should always be a number');
 
+    //We should be able to select a page object as well
+    query.page = query.page || 1;
+
     // Define the initial params object
     var params = {
-      skip: query.skip,
+      skip: query.skip || ((query.page - 1) * query.limit),
       limit: query.limit
     };
 
